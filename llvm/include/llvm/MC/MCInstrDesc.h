@@ -239,7 +239,7 @@ public:
 
   /// \brief Returns true if the specified instruction has a delay slot which
   /// must be filled by the code generator.
-  bool hasDelaySlot() const { return Flags & (1 << MCID::DelaySlot); }
+  bool hasDelaySlot() const { return false; }
 
   //===--------------------------------------------------------------------===//
   // Side Effect Analysis
