@@ -2150,11 +2150,6 @@ MipsAsmParser::tryExpandInstruction(MCInst &Inst, SMLoc IDLoc,
   case Mips::BGTULImmMacro:
     return expandCondBranches(Inst, IDLoc, Instructions) ? MER_Fail
                                                          : MER_Success;
-  case Mips::SDivMacro:
-
-  case Mips::DSDivMacro:
-  case Mips::UDivMacro:
-  case Mips::DUDivMacro:
   case Mips::Ulh:
     return expandUlh(Inst, true, IDLoc, Instructions) ? MER_Fail : MER_Success;
   case Mips::Ulhu:
