@@ -2150,6 +2150,18 @@ MipsAsmParser::tryExpandInstruction(MCInst &Inst, SMLoc IDLoc,
   case Mips::BGTULImmMacro:
     return expandCondBranches(Inst, IDLoc, Instructions) ? MER_Fail
                                                          : MER_Success;
+  case Mips::SDivMacro:
+    return expandDiv(Inst, IDLoc, Instructions, false, true) ? MER_Fail
+                                                             : MER_Success;
+  case Mips::DSDivMacro:
+    return expandDiv(Inst, IDLoc, Instructions, true, true) ? MER_Fail
+                                                            : MER_Success;
+  case Mips::UDivMacro:
+    return expandDiv(Inst, IDLoc, Instructions, false, false) ? MER_Fail
+                                                              : MER_Success;
+  case Mips::DUDivMacro:
+    return expandDiv(Inst, IDLoc, Instructions, true, false) ? MER_Fail
+                                                             : MER_Success;
   case Mips::Ulh:
     return expandUlh(Inst, true, IDLoc, Instructions) ? MER_Fail : MER_Success;
   case Mips::Ulhu:
@@ -3064,7 +3076,9 @@ bool MipsAsmParser::expandDiv(MCInst &Inst, SMLoc IDLoc,
     DivOp = Signed ? Mips::SDIV : Mips::UDIV;
     ZeroReg = Mips::ZERO;
   }
-
+  // hack: only emit the divop and exit
+  emitRR(DivOp, RsReg, RtReg, IDLoc, Instructions);
+  return false;
   bool UseTraps = useTraps();
 
   if (RsReg == Mips::ZERO || RsReg == Mips::ZERO_64) {
