@@ -1,5 +1,12 @@
 This file details the changelog of Keystone.
 
+Version 0.9.3: September 28th, 2024
+
+- Output for the opcodes "c.lt.s" and "c.olt.s" have been swapped.
+- Output for the opcodes "c.le.s" and "c.ole.s" have been swapped.
+- Output for the opcodes "div" and "divu" have been changed:
+    - Instead of producing multiple lines (to check if the divisor argument of the division is 0) it now produces only 1 line (just the division instruction).
+
 ------------------------------
 Version 0.9.2: June 21st, 2020
 
