@@ -3076,7 +3076,9 @@ bool MipsAsmParser::expandDiv(MCInst &Inst, SMLoc IDLoc,
     DivOp = Signed ? Mips::SDIV : Mips::UDIV;
     ZeroReg = Mips::ZERO;
   }
-
+  // hack: only emit the divop and exit
+  emitRR(DivOp, RsReg, RtReg, IDLoc, Instructions);
+  return false;
   bool UseTraps = useTraps();
 
   if (RsReg == Mips::ZERO || RsReg == Mips::ZERO_64) {
